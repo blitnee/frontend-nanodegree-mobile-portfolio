@@ -5,7 +5,7 @@ The objective for this project was to optimize the online portfolio for speed. I
 
 ### My Optimization Process
 
-####Part 1: Optimize PageSpeed Insights score for _index.html_
+####Part 1: Optimize PageSpeed Insights score for `index.html`
 
 * Create thumb images for project list on main page
 * Compress all Images
@@ -15,9 +15,21 @@ The objective for this project was to optimize the online portfolio for speed. I
 * Reposition all render blocking to end of document
 
 
-####Part 2: Optimize Frames per Second in _pizza.html_
+####Part 2: Optimize Frames per Second in `pizza.html`
 
-To optimize views/pizza.html, you will need to modify views/js/main.js until your frames per second rate is 60 fps or higher. You will find instructive comments in main.js.
+* Remove FX `determineDx`
+* Revise FX `changePizzaSizes` _(line 427)_
+ * Create new variable `newWidth`
+ * Add case statement to FX
+ * Replace `querySelectorAll` with `getElementsByClassName` for efficiency within the DOM
+ * Remove references to deleted FXs, create new for loop to change pizza sizes
+* Revise FX `updatePositions` _(line 491)_
+ * Replace `querySelectorAll` with `getElementsByClassName` for efficiency within the DOM
+ * Replace `.mover` with `mover`
+ * Declare variable `items` outside of loop
+ * Create `scroll` variable equal to document scroll value
+ * Create `pizzas` array to hold created pizzas
+ * Revise for loop
 
 You might find the FPS Counter/HUD Display useful in Chrome developer tools described here: [Chrome Dev Tools tips-and-tricks](https://developer.chrome.com/devtools/docs/tips-and-tricks).
 
