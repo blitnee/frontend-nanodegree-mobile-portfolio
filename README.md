@@ -26,8 +26,21 @@ The objective for this project was to optimize the online portfolio for speed. I
 * Revise FX `updatePositions` _(line 491)_
  * Replace `querySelectorAll` with `getElementsByClassName` for efficiency within the DOM
  * Replace `.mover` with `mover`
- * Declare variables `pizza`, `scroll`, and `pizzaArray` outside of loop
- * Revise for loop
+ * Declare variables outside of loop
+ * Substitue _document.body.scrollTop_ for _window.scrollY_ for efficiency
+ * Revise _for_ loop, caching item length
+ * Substitute _style.left_ for _transform = translateX_ to avoid paint trigger
+* Revise Document Event Listener _(line 517)_
+ * Create _row_ variable to respond to browser height
+ * Declare variables outside of loop
+
+
+### How to View
+
+1. Download and open the zip file
+2. Open `index.html` to view the main project page
+3. You can view `pizza.html` directly by opening it from inside the 'views' folder
+
 
 
 ### Customization with Bootstrap
