@@ -1,16 +1,12 @@
 /*
 Welcome to the 60fps project! Your goal is to make Cam's Pizzeria website run
 jank-free at 60 frames per second.
-
 There are two major issues in this code that lead to sub-60fps performance. Can
 you spot and fix both?
-
-
 Built into the code, you'll find a few instances of the User Timing API
 (window.performance), which will be console.log()ing frame rate data into the
 browser console. To learn more about User Timing API, check out:
 http://www.html5rocks.com/en/tutorials/webperformance/usertiming/
-
 Creator:
 Cameron Pittman, Udacity Course Developer
 cameron *at* udacity *dot* com
@@ -404,7 +400,6 @@ var resizePizzas = function(size) {
 
   // Changes the value for the size of the pizza above the slider
   function changeSliderLabel(size) {
-    var newWidth;
     switch(size) {
       case "1":
         document.querySelector("#pizzaSize").innerHTML = "Small";
@@ -425,7 +420,7 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-    var newWidth;
+      var newWidth;
     switch(size) {
       case "1":
         newWidth = 25;
@@ -439,15 +434,15 @@ var resizePizzas = function(size) {
       default:
         console.log("bug in changePizzaSizes");
     }
-    var randomPizzas = document.getElem(".randomPizzaContainer");
+    var randomPizzas = document.querySelectorAll(".randomPizzaContainer");
 
     for (var i = 0; i < randomPizzas.length; i++) {
         randomPizzas[i].style.width = newWidth + "%";
     }
   }
 
-
   changePizzaSizes(size);
+
 
   // User Timing API is awesome
   window.performance.mark("mark_end_resize");
@@ -490,17 +485,17 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // Moves the sliding background pizzas based on scroll position
 function updatePositions() {
   frame++;
-
-  var pizza = document.getElementsByClassName('mover');
-  var scroll = document.body.scrollTop;
-  var pizzaArray = [];
-
   window.performance.mark("mark_start_frame");
 
-  for (i = 0; i < pizza.length; i++) {
-    pizzaArray.push(Math.sin((scroll / 1000) + i));
-    var phase = pizzaArray[i];
-    pizza[i].style.left = pizza[i].basicLeft + 100 * phase + 'px';
+
+  var items = document.getElementsByClassName('mover');
+  var scroll = window.scrollY;
+  var itemsLength = items.length;
+
+  for (i = 0; i < itemsLength; i++) {
+    var phase = Math.sin((scroll / 1250) + i);
+    //items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    items[i].style.transform = 'translateX(' + ((i % 8) * 256 + (100 * phase)) + 'px)';
   }
 
 
@@ -533,3 +528,4 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   updatePositions();
 });
+
